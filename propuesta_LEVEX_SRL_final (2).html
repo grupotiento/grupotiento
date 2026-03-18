@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Propuesta LEVEX SRL — Grupo Tiento</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0a0a0a; --gray-light: #f0efed; --gray-line: #e0dedd;
+    --white: #ffffff; --red: #d42b2b; --red-dark: #a01f1f;
+    --text: #0a0a0a; --text-muted: #6b6b6b;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--white); color: var(--text); font-size: 15px; line-height: 1.65; }
+  .topbar { background: var(--black); padding: 0 40px; display: flex; align-items: center; justify-content: space-between; height: 52px; border-bottom: 2px solid var(--red); }
+  .topbar-brand { font-family: 'Bebas Neue', sans-serif; font-size: 1.35rem; color: var(--white); letter-spacing: 0.14em; }
+  .topbar-tag { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.35); font-weight: 300; }
+  .hero { background: var(--black); padding: 80px 40px 88px; position: relative; overflow: hidden; }
+  .hero::after { content: 'EDD'; position: absolute; right: -20px; bottom: -40px; font-family: 'Bebas Neue', sans-serif; font-size: 18rem; color: rgba(255,255,255,0.025); line-height: 1; pointer-events: none; user-select: none; }
+  .hero-inner { max-width: 820px; margin: 0 auto; position: relative; z-index: 1; }
+  .hero-eyebrow { display: inline-flex; align-items: center; gap: 10px; margin-bottom: 28px; }
+  .hero-eyebrow-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--red); flex-shrink: 0; }
+  .hero-eyebrow-text { font-size: 0.68rem; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(255,255,255,0.4); }
+  .hero h1 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(3rem, 7vw, 5.5rem); color: var(--white); letter-spacing: 0.04em; line-height: 0.95; margin-bottom: 32px; }
+  .hero h1 span { color: var(--red); }
+  .hero-divider { width: 40px; height: 2px; background: var(--red); margin-bottom: 24px; }
+  .hero-sub { font-size: 1rem; color: rgba(255,255,255,0.5); max-width: 460px; font-weight: 300; line-height: 1.7; }
+  .hero-meta { margin-top: 48px; display: flex; gap: 32px; flex-wrap: wrap; }
+  .hero-meta-item { display: flex; flex-direction: column; gap: 3px; }
+  .hero-meta-label { font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.25); }
+  .hero-meta-value { font-size: 0.88rem; color: rgba(255,255,255,0.7); }
+  .page { max-width: 820px; margin: 0 auto; }
+  .section { padding: 64px 40px; border-bottom: 1px solid var(--gray-line); }
+  .section-header { display: flex; align-items: baseline; gap: 16px; margin-bottom: 36px; }
+  .section-num { font-family: 'Bebas Neue', sans-serif; font-size: 3.5rem; color: var(--gray-line); line-height: 1; flex-shrink: 0; }
+  .section-titles { display: flex; flex-direction: column; gap: 2px; }
+  .section-label { font-size: 0.62rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--red); font-weight: 600; }
+  .section-title { font-family: 'Libre Baskerville', serif; font-size: 1.7rem; font-weight: 700; color: var(--black); line-height: 1.15; }
+  .context-intro { font-size: 0.97rem; color: var(--text-muted); margin-bottom: 32px; max-width: 580px; font-weight: 400; font-style: italic; font-family: 'Libre Baskerville', serif; line-height: 1.75; }
+  .pain-list { list-style: none; }
+  .pain-item { display: flex; align-items: center; gap: 18px; padding: 18px 0; border-bottom: 1px solid var(--gray-line); opacity: 0; transform: translateX(-10px); animation: fadeSlide 0.35s ease forwards; }
+  .pain-item:first-child { border-top: 1px solid var(--gray-line); }
+  .pain-item:nth-child(1) { animation-delay: 0.05s; } .pain-item:nth-child(2) { animation-delay: 0.12s; } .pain-item:nth-child(3) { animation-delay: 0.19s; } .pain-item:nth-child(4) { animation-delay: 0.26s; } .pain-item:nth-child(5) { animation-delay: 0.33s; }
+  @keyframes fadeSlide { to { opacity: 1; transform: translateX(0); } }
+  .pain-x { width: 30px; height: 30px; background: var(--red); color: var(--white); display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 700; flex-shrink: 0; }
+  .pain-text { font-size: 0.95rem; color: var(--text); }
+  .fases-intro { font-size: 0.97rem; color: var(--text-muted); margin-bottom: 36px; max-width: 560px; font-weight: 300; line-height: 1.7; }
+  .fases-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; background: var(--gray-line); border: 1px solid var(--gray-line); }
+  .fase-card { background: var(--white); padding: 28px 26px; transition: background 0.2s ease; }
+  .fase-card:hover { background: #fafafa; }
+  .fase-top { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 12px; }
+  .fase-num-badge { font-family: 'Bebas Neue', sans-serif; font-size: 0.88rem; letter-spacing: 0.12em; color: var(--white); background: var(--black); padding: 3px 10px; }
+  .fase-weeks { font-size: 0.65rem; color: var(--text-muted); letter-spacing: 0.06em; text-align: right; line-height: 1.4; }
+  .fase-title { font-family: 'Libre Baskerville', serif; font-size: 1.1rem; font-weight: 700; color: var(--black); margin-bottom: 16px; border-bottom: 2px solid var(--red); padding-bottom: 10px; }
+  .fase-items { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+  .fase-items li { display: flex; align-items: flex-start; gap: 10px; font-size: 0.84rem; color: #444; line-height: 1.4; }
+  .fase-items li::before { content: '—'; color: var(--red); font-size: 0.75rem; flex-shrink: 0; margin-top: 1px; font-weight: 700; }
+  .team-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .team-card { border: 1px solid var(--gray-line); padding: 32px 28px; position: relative; }
+  .team-card::before { content: ''; position: absolute; top: 0; left: 0; width: 3px; height: 100%; background: var(--red); }
+  .avatar { width: 52px; height: 52px; background: var(--black); color: var(--white); display: flex; align-items: center; justify-content: center; font-family: 'Libre Baskerville', serif; font-size: 1.05rem; font-weight: 700; margin-bottom: 20px; letter-spacing: 0.05em; }
+  .team-name { font-family: 'Libre Baskerville', serif; font-size: 1.1rem; font-weight: 700; color: var(--black); margin-bottom: 4px; }
+  .team-role { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--red); font-weight: 600; margin-bottom: 4px; }
+  .team-area { font-size: 0.62rem; letter-spacing: 0.16em; text-transform: uppercase; color: #6b6b6b; font-weight: 500; margin-bottom: 14px; }
+  .team-desc { font-size: 0.87rem; color: var(--text-muted); line-height: 1.65; font-weight: 300; }
+  .entregables-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border-top: 1px solid var(--gray-line); border-left: 1px solid var(--gray-line); }
+  .entregable-item { display: flex; align-items: flex-start; gap: 14px; padding: 16px 18px; border-right: 1px solid var(--gray-line); border-bottom: 1px solid var(--gray-line); font-size: 0.88rem; color: var(--text); line-height: 1.45; }
+  .check-mark { color: var(--red); font-weight: 700; font-size: 0.9rem; flex-shrink: 0; margin-top: 1px; }
+  .inversion-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; border: 1px solid var(--black); margin-bottom: 16px; }
+  .inv-block { padding: 28px 24px; border-right: 1px solid var(--black); text-align: center; }
+  .inv-block:last-child { border-right: none; }
+  .inv-label { font-size: 0.6rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 10px; display: block; }
+  .inv-value { font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; color: var(--black); letter-spacing: 0.04em; line-height: 1; margin-bottom: 6px; }
+  .inv-value.red { color: var(--red); }
+  .inv-sub { font-size: 0.77rem; color: var(--text-muted); line-height: 1.45; font-weight: 300; }
+  .inv-note { font-size: 0.8rem; color: var(--text-muted); font-style: italic; padding: 14px 0 0; border-top: 1px solid var(--gray-line); text-align: center; }
+  .cta-section { background: var(--black); position: relative; overflow: hidden; }
+  .cta-section::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--red); }
+  .cta-inner { max-width: 820px; margin: 0 auto; padding: 80px 40px; display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+  .cta-eyebrow { font-size: 0.62rem; letter-spacing: 0.24em; text-transform: uppercase; color: var(--red); font-weight: 600; display: block; margin-bottom: 18px; }
+  .cta-title { font-family: 'Bebas Neue', sans-serif; font-size: 4.5rem; color: var(--white); letter-spacing: 0.03em; line-height: 0.92; margin-bottom: 20px; }
+  .cta-sub { font-size: 0.92rem; color: rgba(255,255,255,0.45); font-weight: 300; line-height: 1.7; margin-bottom: 32px; }
+  .cta-btn { display: inline-block; background: var(--red); color: var(--white); font-size: 0.75rem; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; padding: 14px 30px; }
+  .cta-right { display: flex; flex-direction: column; gap: 24px; }
+  .contact-block { display: flex; flex-direction: column; gap: 4px; }
+  .contact-label { font-size: 0.58rem; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(255,255,255,0.25); }
+  .contact-value { font-size: 0.9rem; color: rgba(255,255,255,0.7); }
+  .contact-divider { width: 100%; height: 1px; background: rgba(255,255,255,0.08); }
+  footer { background: #050505; padding: 20px 40px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+  .footer-brand { font-family: 'Bebas Neue', sans-serif; font-size: 0.95rem; color: rgba(255,255,255,0.3); letter-spacing: 0.14em; }
+  .footer-note { font-size: 0.65rem; color: rgba(255,255,255,0.15); letter-spacing: 0.08em; }
+  @media (max-width: 640px) {
+    .topbar { padding: 0 24px; } .topbar-tag { display: none; }
+    .hero { padding: 56px 24px 64px; } .hero::after { display: none; }
+    .section { padding: 48px 24px; }
+    .fases-grid, .team-grid, .entregables-grid { grid-template-columns: 1fr; }
+    .inversion-grid { grid-template-columns: 1fr; }
+    .inv-block { border-right: none; border-bottom: 1px solid var(--black); } .inv-block:last-child { border-bottom: none; }
+    .cta-inner { grid-template-columns: 1fr; gap: 40px; padding: 56px 24px; }
+    footer { padding: 20px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-brand">Grupo Tiento</div>
+  <div class="topbar-tag">Expertos en Desarrollo Organizacional</div>
+</div>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">
+      <div class="hero-eyebrow-dot"></div>
+      <div class="hero-eyebrow-text">Propuesta Comercial · LEVEX SRL · 2026</div>
+    </div>
+    <h1>SISTEMA DE<br>EVALUACIÓN DE<br><span>DESEMPEÑO</span></h1>
+    <div class="hero-divider"></div>
+    <p class="hero-sub">Un proceso estructurado, objetivo y directamente vinculado a decisiones salariales. Diseñado para las dos operaciones: Argentina y Perú.</p>
+    <div class="hero-meta">
+      <div class="hero-meta-item">
+        <span class="hero-meta-label">Cliente</span>
+        <span class="hero-meta-value">LEVEX SRL</span>
+      </div>
+      <div class="hero-meta-item">
+        <span class="hero-meta-label">Fecha objetivo</span>
+        <span class="hero-meta-value">Julio 2026</span>
+      </div>
+      <div class="hero-meta-item">
+        <span class="hero-meta-label">Duración</span>
+        <span class="hero-meta-value">16 semanas</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="page">
+
+  <!-- 01 DESAFÍO -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">01</div>
+      <div class="section-titles">
+        <span class="section-label">Contexto actual</span>
+        <h2 class="section-title">Su desafío</h2>
+      </div>
+    </div>
+    <p class="context-intro">"LEVEX está en un momento clave: 20 personas en Argentina y Perú, cultura de resultados instalada — pero sin un sistema que respalde decisiones salariales con criterios objetivos ni que oriente el desarrollo individual del equipo."</p>
+    <ul class="pain-list">
+      <li class="pain-item"><span class="pain-x">✗</span><span class="pain-text">Incrementos salariales sin criterios documentados ni objetivos</span></li>
+      <li class="pain-item"><span class="pain-x">✗</span><span class="pain-text">Líderes gestionando equipos sin herramientas formales de evaluación</span></li>
+      <li class="pain-item"><span class="pain-x">✗</span><span class="pain-text">Ausencia de equidad verificable entre Argentina y Perú</span></li>
+      <li class="pain-item"><span class="pain-x">✗</span><span class="pain-text">Descripciones de puesto desactualizadas, sin competencias definidas</span></li>
+      <li class="pain-item"><span class="pain-x">✗</span><span class="pain-text">Talento valioso sin dirección clara de desarrollo profesional</span></li>
+    </ul>
+  </div>
+
+  <!-- 02 SOLUCIÓN -->
+  <div class="section" style="background: var(--gray-light);">
+    <div class="section-header">
+      <div class="section-num">02</div>
+      <div class="section-titles">
+        <span class="section-label">Nuestra propuesta</span>
+        <h2 class="section-title">La solución</h2>
+      </div>
+    </div>
+    <p class="fases-intro">Diseñamos e implementamos un Sistema de Evaluación de Desempeño a medida: objetivo, homogéneo para ambos países y directamente vinculado a decisiones salariales reales.</p>
+    <div class="fases-grid">
+      <div class="fase-card">
+        <div class="fase-top"><span class="fase-num-badge">Fase 1</span><span class="fase-weeks">Sem. 1 – 4</span></div>
+        <div class="fase-title">Fundamentos</div>
+        <ul class="fase-items">
+          <li>Organigrama formal ARG–PER</li>
+          <li>20 descripciones de puesto actualizadas</li>
+          <li>Modelo de competencias organizacionales</li>
+          <li>Relevamiento de formación del equipo</li>
+        </ul>
+      </div>
+      <div class="fase-card">
+        <div class="fase-top"><span class="fase-num-badge">Fase 2</span><span class="fase-weeks">Sem. 5 – 6</span></div>
+        <div class="fase-title">Estructura Salarial</div>
+        <ul class="fase-items">
+          <li>Análisis de equidad interna ARG–PER</li>
+          <li>Escalas y bandas salariales</li>
+          <li>Criterios objetivos de incremento</li>
+        </ul>
+      </div>
+      <div class="fase-card">
+        <div class="fase-top"><span class="fase-num-badge">Fase 3</span><span class="fase-weeks">Sem. 7 – 10</span></div>
+        <div class="fase-title">Diseño del Sistema EDD</div>
+        <ul class="fase-items">
+          <li>Formato de evaluación completo</li>
+          <li>Escalas, ponderaciones y fichas</li>
+          <li>Política formal del proceso</li>
+          <li>Diferenciación vs. bono por KPIs</li>
+        </ul>
+      </div>
+      <div class="fase-card">
+        <div class="fase-top"><span class="fase-num-badge">Fase 4</span><span class="fase-weeks">Sem. 11 – 16</span></div>
+        <div class="fase-title">Implementación</div>
+        <ul class="fase-items">
+          <li>Capacitación a líderes en evaluación objetiva</li>
+          <li>Estrategia de comunicación interna</li>
+          <li>Material explicativo para colaboradores</li>
+          <li>Piloto, ajustes y cierre</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 03 EQUIPO -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">03</div>
+      <div class="section-titles">
+        <span class="section-label">Quiénes somos</span>
+        <h2 class="section-title">El equipo</h2>
+      </div>
+    </div>
+    <div class="team-grid">
+      <div class="team-card">
+        <div class="avatar">FG</div>
+        <div class="team-name">Florencia Gomez Castro</div>
+        <div class="team-role">CEO &amp; Founding Partner</div>
+        <div class="team-area">Estrategia &amp; Liderazgo</div>
+        <div class="team-desc">Diseño estratégico e implementación de soluciones organizacionales, acompañamiento a líderes y gestión del cambio. Lic. en Administración de RRHH — más de 10 años de experiencia.</div>
+      </div>
+      <div class="team-card">
+        <div class="avatar">AL</div>
+        <div class="team-name">Alejandra</div>
+        <div class="team-role">Founding Partner</div>
+        <div class="team-area">Operaciones &amp; Tecnología</div>
+        <div class="team-desc">Directora de operaciones. Estructura de procesos, lean operations, metodologías ágiles e inteligencia artificial aplicada a la gestión organizacional. Abogada (UBA).</div>
+      </div>
+      <div class="team-card">
+        <div class="avatar">FE</div>
+        <div class="team-name">Fernanda</div>
+        <div class="team-role">Founding Partner</div>
+        <div class="team-area">Desarrollo &amp; Transformación Digital</div>
+        <div class="team-desc">Directora de Marketing. Especialista en comunicación organizacional, employer branding y producción de contenido audiovisual. Referente en estrategia de social media para marcas empleadoras.</div>
+      </div>
+      <div class="team-card">
+        <div class="avatar">EU</div>
+        <div class="team-name">Eugenia</div>
+        <div class="team-role">Client Success Lead</div>
+        <div class="team-area">Soporte al Cliente &amp; Administración</div>
+        <div class="team-desc">Gestión de la experiencia del cliente y soporte administrativo para la ejecución fluida de cada proyecto.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 04 ENTREGABLES -->
+  <div class="section" style="background: var(--gray-light);">
+    <div class="section-header">
+      <div class="section-num">04</div>
+      <div class="section-titles">
+        <span class="section-label">Resultados concretos</span>
+        <h2 class="section-title">Entregables clave</h2>
+      </div>
+    </div>
+    <div class="entregables-grid">
+      <div class="entregable-item"><span class="check-mark">✓</span> Organigrama formal validado ARG–PER</div>
+      <div class="entregable-item"><span class="check-mark">✓</span> 20 descripciones de puesto con competencias</div>
+      <div class="entregable-item"><span class="check-mark">✓</span> Modelo de competencias organizacionales</div>
+      <div class="entregable-item"><span class="check-mark">✓</span> Análisis salarial con recomendaciones</div>
+      <div class="entregable-item"><span class="check-mark">✓</span> Sistema EDD completo y operativo</div>
+      <div class="entregable-item"><span class="check-mark">✓</span> Líderes capacitados en evaluación objetiva</div>
+      <div class="entregable-item"><span class="check-mark">✓</span> Plan de comunicación interna ejecutado</div>
+      <div class="entregable-item"><span class="check-mark">✓</span> Sistema listo para implementación julio 2026</div>
+    </div>
+  </div>
+
+  <!-- 05 INVERSIÓN -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">05</div>
+      <div class="section-titles">
+        <span class="section-label">Inversión</span>
+        <h2 class="section-title">Estructura de honorarios</h2>
+      </div>
+    </div>
+    <div class="inversion-grid">
+      <div class="inv-block">
+        <span class="inv-label">Tarifa</span>
+        <div class="inv-value red">A convenir</div>
+        <div class="inv-sub">por hora trabajada</div>
+      </div>
+      <div class="inv-block">
+        <span class="inv-label">Meses 1 &amp; 2</span>
+        <div class="inv-value">A convenir</div>
+        <div class="inv-sub">hasta 100 hs/mes<br>fase de mayor intensidad</div>
+      </div>
+      <div class="inv-block">
+        <span class="inv-label">Mes 3 en adelante</span>
+        <div class="inv-value">A convenir</div>
+        <div class="inv-sub">hasta 50 hs/mes<br>acompañamiento sostenido</div>
+      </div>
+    </div>
+    <p class="inv-note">Sin exclusividad · Sin costos fijos · Ajuste flexible según avance real del proyecto</p>
+  </div>
+
+</div>
+
+<!-- CTA FINAL -->
+<div class="cta-section">
+  <div class="cta-inner">
+    <div class="cta-left">
+      <span class="cta-eyebrow">Próximo paso</span>
+      <div class="cta-title">¿ARRANCAMOS?</div>
+      <p class="cta-sub">Una reunión de 30 minutos es todo lo que necesitamos para alinear expectativas y dar inicio al proyecto.</p>
+      <div class="cta-btn">Agendá tu reunión sin cargo</div>
+    </div>
+    <div class="cta-right">
+      <div class="contact-block">
+        <span class="contact-label">Email</span>
+        <span class="contact-value">info&#64;rrhhconsultora&#46;com</span>
+      </div>
+      <div class="contact-divider"></div>
+      <div class="contact-block">
+        <span class="contact-label">Teléfono</span>
+        <span class="contact-value">+54 9 11 5599-1644</span>
+      </div>
+      <div class="contact-divider"></div>
+      <div class="contact-block">
+        <span class="contact-label">LinkedIn</span>
+        <span class="contact-value">linkedin&#46;com/in/florgomezcastro</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-brand">Grupo Tiento</div>
+  <div class="footer-note">Expertos en Desarrollo Organizacional · 2026</div>
+</footer>
+
+</body>
+</html>
